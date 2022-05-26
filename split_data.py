@@ -24,6 +24,7 @@ for i in range(0, 50):
 def split_and_save(list, type, ratio):
     assert ratio > 0 and ratio < 1, "Ratio must be in range (0,1)"
     assert type in ["mountains", "highlands"], "Type must be mountains or highlands"
+    assert all(np.shape(i) == (128,128) for i in list), "All array must be of size (128, 128)"
     train, test, train_idx, test_idx = train_test_split(list, np.array(range(0, len(list))), train_size = ratio)
     print(f"{len(train)} / {len(test)}")
 

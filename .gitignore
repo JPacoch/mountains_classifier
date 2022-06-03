@@ -9,6 +9,7 @@ __pycache__/
 data/
 log/
 dane/
+arrays/
 
 # C extensions
 *.so

@@ -20,6 +20,18 @@ for i in range(0, 50):
     arr = np.random.randint(256, size = (128, 128))
     list.append(arr)
 
+# wczytywanie tablic z folderu arrays
+def read_arrays(type):
+    list = []
+    for file in os.listdir(os.getcwd() + f"\\arrays\\{type}"):
+        print(os.path.join(os.getcwd() + f"\\arrays\\", file))
+        img = Image.open(os.path.join(os.getcwd() + f"\\arrays\\{type}", file))
+        arr = np.array(img)
+        list.append(arr)
+    return list
+
+list = read_arrays("mountains")
+
 # podział danych na zbiory i zapisanie w odpowiednich folderach
 def split_and_save(list, type, ratio):
     assert ratio > 0 and ratio < 1, "Ratio must be in range (0,1)"

@@ -30,7 +30,7 @@ def read_arrays(type):
         list.append(arr)
     return list
 
-list = read_arrays("mountains")
+list = read_arrays("highlands")
 
 # podział danych na zbiory i zapisanie w odpowiednich folderach
 def split_and_save(list, type, ratio):
@@ -46,4 +46,4 @@ def split_and_save(list, type, ratio):
             img = Image.fromarray(arr)
             img.save(path + f"\\{type}\\{type}{idx}.png")
 
-split_and_save(list, "mountains", 0.7)
+split_and_save(list, "highlands", 0.7)

@@ -30,4 +30,20 @@ def clip_windows(file, type):
             clip = Image.fromarray(clip)
             clip.save(f"arrays/{type}/array{index}.png", format='PNG')
 
-clip_windows("data/wyzyny_train.gpkg", "highlands")
+def clip_windows(file, type):
+    points = gpd.read_file(file)
+    src = rasterio.open('hillshade.tif') #raster
+    i = 0
+    for point in points['geometry']:
+        x = point.xy[0][0]
+        y = point.xy[1][0]
+        row, col = src.index(x,y)
+        rst = src.read(1, window=rasterio.windows.Window(col_off=col, row_off=row,
+                                                        width=128, height=128))
+        # plt.imshow(rst, cmap='binary')
+        # plt.show()
+        clip = Image.fromarray(rst)
+        clip.save(f"arrays/{type}/array{i}.png", format='PNG')
+        i=i+1
+
+clip_windows("karpaty.gpkg", "mountains") #zbiory punktow

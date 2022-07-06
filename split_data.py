@@ -12,13 +12,7 @@ def prepare_dirs(dir):
             os.makedirs(folder)
             print(f"{folder} created")
 
-prepare_dirs("dane")
-
-# generowanie sztucznych tablic do testów
-list = []
-for i in range(0, 50):
-    arr = np.random.randint(256, size = (128, 128))
-    list.append(arr)
+prepare_dirs("data")
 
 # wczytywanie tablic z folderu arrays
 def read_arrays(type):
@@ -30,7 +24,7 @@ def read_arrays(type):
         list.append(arr)
     return list
 
-list = read_arrays("highlands")
+list = read_arrays("mountains")
 
 # podział danych na zbiory i zapisanie w odpowiednich folderach
 def split_and_save(list, type, ratio):
@@ -41,9 +35,9 @@ def split_and_save(list, type, ratio):
     print(f"{len(train)} / {len(test)}")
 
     for set, name, idxs in zip([train, test], ["train", "test"], [train_idx, test_idx]):
-        path = os.getcwd() + "\\dane\\" + name
+        path = os.getcwd() + "\\data\\" + name
         for arr, idx in zip(set, idxs):
             img = Image.fromarray(arr)
-            img.save(path + f"\\{type}\\{type}{idx}.png")
+            img.save(path + f"\\{type}\\{type}{idx}.png", format='PNG')
 
-split_and_save(list, "highlands", 0.7)
+split_and_save(list, "mountains", 0.7)
